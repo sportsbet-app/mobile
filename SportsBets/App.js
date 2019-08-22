@@ -1,18 +1,31 @@
-import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, View, Button, Alert } from 'react-native';
+import Auth0 from 'react-native-auth0';
+const auth0 = new Auth0({ domain: 'brellin.auth0.com', clientId: 'ESHCP7e8Vxb5slqmXWuq2e2WSLsPcahZ' });
+// import { auth0, AUTH0_DOMAIN } from './auth0.js';
+export default class App extends React.Component {
+  loginWindow() {
+    
+    auth0
+      .webAuth
+      .authorize({ scope: 'openid profile email', audience: 'https://brellin.auth0.com/userinfo' })
+      .then(credentials =>
+        console.log(credentials)
+        // Successfully authenticated
+        // Store the accessToken
+      )
+      .catch(error => console.log(error));
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu',
-});
-
-export default class App extends Component {
+  }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+      <Text>Welcome To Sports Bet App</Text>
+        <Button
+          title="login"
+          onPress={() => this.loginWindow()}
+        />
+
       </View>
     );
   }
@@ -21,18 +34,9 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    backgroundColor: '#fff',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+    justifyContent: 'center',
   },
 });
+

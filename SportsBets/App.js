@@ -5,6 +5,7 @@
 
 import React, {Fragment} from 'react';
 import {
+  ActivityIndicator,
   SafeAreaView,
   StyleSheet,
   ScrollView,
@@ -15,6 +16,7 @@ import {
 
 import {
   Header,
+  Image,
   LearnMoreLinks,
   Colors,
   DebugInstructions,
@@ -22,25 +24,12 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 
 const App = () => {
+  
   return (
     <Fragment>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Sports Bets</Text>
-            </View>
-          </View>
-        </ScrollView>
-      </SafeAreaView>
+      <View style={[styles.container, styles.horizontal]}>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </View>
     </Fragment>
   );
 };
@@ -82,6 +71,15 @@ const styles = StyleSheet.create({
     paddingRight: 12,
     textAlign: 'right',
   },
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10
+  }
 });
 
 export default App;
